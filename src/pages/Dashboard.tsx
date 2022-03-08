@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { SideMenu } from '../components/SideMenu';
 import { Header } from '../components/Header';
+import { Home } from './Home';
 
 const useStyles = makeStyles(({ breakpoints }: Theme) => ({
   main: {
@@ -27,7 +28,7 @@ const Dashboard = (): JSX.Element => {
         <Header mobile={xsDown} onClick={() => setOpen(!open)} />
         <section style={{ padding: '2rem' }}>
           <Routes>
-            <Route path="home" element="Hellow" />
+            <Route path="home" element={<Home />} />
             <Route path="new-tasks" element="Hellow 2" />
             <Route path="finished-tasks" element="Hellow 3" />
           </Routes>

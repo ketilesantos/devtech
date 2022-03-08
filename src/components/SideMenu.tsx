@@ -25,7 +25,7 @@ interface SideMenuProps {
 }
 
 const items = [
-  { icon: <Home />, label: 'Introdução', path: '/dashboard/home' },
+  { icon: <Home />, label: 'Home', path: '/dashboard/home' },
   { icon: <AddIcon />, label: 'Novas Tarefas', path: '/dashboard/new-tasks' },
   { icon: <Stories />, label: 'Tarefas Finalizadas', path: '/dashboard/finished-tasks' },
 ];
@@ -34,10 +34,10 @@ export const SideMenu = ({ open, variant, onClose }: SideMenuProps): JSX.Element
   const renderMenuItems = (
     <List>
       {items.map((item) => (
-        <NavLink key={item.label} to={item.path} style={{ textDecoration: 'none', color: '#353535' }}>
+        <NavLink key={item.label} to={item.path} style={{ textDecoration: 'none', color: '#5B5B5B' }}>
           {({ isActive }) => (
             <ListItemButton key={item.label}>
-              <ListItemIcon sx={{ color: isActive ? '#EB2368' : 'inherit' }}>{item.icon}</ListItemIcon>
+              <ListItemIcon sx={{ color: isActive ? '#5B2F8B' : 'inherit' }}>{item.icon}</ListItemIcon>
               <ListItemText primary={item.label} />
             </ListItemButton>
           )}
