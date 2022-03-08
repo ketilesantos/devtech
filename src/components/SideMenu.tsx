@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   List,
   Box,
@@ -9,12 +9,15 @@ import {
   ListSubheader,
   Typography,
   Grid,
+  Divider,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Stories from '@mui/icons-material/AutoStories';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import Home from '@mui/icons-material/Home';
 import { NavLink } from 'react-router-dom';
+
+import { Logout } from './Logout';
 
 const drawerWidth = 240;
 
@@ -31,19 +34,26 @@ const items = [
 ];
 
 export const SideMenu = ({ open, variant, onClose }: SideMenuProps): JSX.Element => {
+  const [isLogoutOpenDialog, setIsLogoutOpenDialog] = useState(false);
+
   const renderMenuItems = (
-    <List>
-      {items.map((item) => (
-        <NavLink key={item.label} to={item.path} style={{ textDecoration: 'none', color: '#5B5B5B' }}>
-          {({ isActive }) => (
-            <ListItemButton key={item.label}>
-              <ListItemIcon sx={{ color: isActive ? '#5B2F8B' : 'inherit' }}>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          )}
-        </NavLink>
-      ))}
-    </List>
+    <>
+      <List>
+        {items.map((item) => (
+          <NavLink key={item.label} to={item.path} style={{ textDecoration: 'none', color: '#5B5B5B' }}>
+            {({ isActive }) => (
+              <ListItemButton key={item.label}>
+                <ListItemIcon sx={{ color: isActive ? '#5B2F8B' : 'inherit' }}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            )}
+          </NavLink>
+        ))}
+      </List>
+      <Box sx={{ flexGrow: 1 }} />
+      <Divider />
+      <Logout isLogoutOpenDialog={isLogoutOpenDialog} onIsLogoutOpenDialog={setIsLogoutOpenDialog} />
+    </>
   );
 
   return (
