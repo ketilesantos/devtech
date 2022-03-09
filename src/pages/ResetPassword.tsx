@@ -1,13 +1,13 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import { LoginForm } from '../components/Login/LoginForm';
+import { ResetForm } from '../components/RecoveryPassword/ResetForm';
 
-const Login = (): JSX.Element => {
+const ResetPassword = (): JSX.Element => {
   return (
     <Grid container alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
-      <LoginForm />
+      <ResetForm />
     </Grid>
   );
 };
 
-export default Login;
+export default ResetPassword;

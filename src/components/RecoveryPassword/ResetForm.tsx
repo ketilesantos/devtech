@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { IconButton, Button, InputAdornment, Box, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import * as yup from 'yup';
@@ -13,28 +12,30 @@ const validationSchema = yup.object().shape({
   newPassword: yup.string().min(8, 'Campo senha deve conter no minimo 8 caracteres').required('Campo obrigatório'),
   confPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), null], 'A senha deve ser correspondente à nova senha.')
+    .oneOf([yup.ref('newPassword'), null], 'O campo confirmação de senha deve ser correspondente ao campo nova senha.')
     .required('Campo obrigatório'),
 });
 
 const INITIAL_VALUES = {
-  email: '',
-  password: '',
+  code: '',
+  newPassword: '',
+  confPassword: '',
 };
 
-export const LoginForm = (): JSX.Element => {
+export const ResetForm = (): JSX.Element => {
   const classes = useStyles();
   const [showPassword, setPassword] = useState(false);
+  const [showConfPassword, setConfPassword] = useState(false);
 
   return (
     <Box sx={{ width: { lg: '439px' } }}>
       <Box sx={{ mb: '13px' }}>
         <Typography className={classes.titleLabel} id="welcome-label" variant="body1">
-          Sejam bem-vindos
+          Redefinir Senha
         </Typography>
 
         <Typography className={classes.subtitleLabel} id="fill-the-data-label" variant="subtitle2">
-          Preencha os campos abaixo para entrar na plataforma
+          Preencha os campos abaixo para redefinir sua senha
         </Typography>
       </Box>
 
@@ -46,19 +47,12 @@ export const LoginForm = (): JSX.Element => {
       >
         {({ isValid }) => (
           <Form className={classes.form}>
+            <Field id="code" name="code" type="text" label="Código" placeholder="154DF6" component={TextFieldWrapper} />
             <Field
-              id="email"
-              name="email"
-              type="email"
-              label="E-mail"
-              placeholder="juliana@gmail.com"
-              component={TextFieldWrapper}
-            />
-            <Field
-              name="password"
+              name="newPassword"
               type={showPassword ? 'text' : 'password'}
               placeholder="Digite sua senha"
-              label="Senha"
+              label="Nova senha"
               component={TextFieldWrapper}
               InputProps={{
                 endAdornment: (
@@ -75,6 +69,27 @@ export const LoginForm = (): JSX.Element => {
                 ),
               }}
             />
+            <Field
+              name="confPassword"
+              type={showConfPassword ? 'text' : 'password'}
+              placeholder="Digite a senha novamente"
+              label="Confirmação de senha"
+              component={TextFieldWrapper}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setConfPassword(!showConfPassword)}
+                      onMouseDown={(event: React.ChangeEvent<EventTarget>) => event.preventDefault()}
+                      edge="end"
+                    >
+                      {showConfPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
             <Button
               className={classes.button}
               variant="contained"
@@ -86,18 +101,6 @@ export const LoginForm = (): JSX.Element => {
             >
               Entrar
             </Button>
-            <Box className={classes.link}>
-              <Typography>Esqueceu sua senha?</Typography>
-              <Link to="/forgot" style={{ color: 'black' }}>
-                <Typography sx={{ marginLeft: '0.5rem' }}> Redefinir a senha </Typography>
-              </Link>
-            </Box>
-            <Box className={classes.link}>
-              <Typography>Não possui cadastro? </Typography>
-              <Link to="/signup" style={{ color: 'black' }}>
-                <Typography sx={{ marginLeft: '0.5rem' }}> Cadastre-se </Typography>
-              </Link>
-            </Box>
           </Form>
         )}
       </Formik>

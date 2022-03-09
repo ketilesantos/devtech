@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
-import Forgot from './pages/Forgot';
+import ResetPassword from './pages/ResetPassword';
+import ForgotPassword from './pages/ForgotPassword';
 import LayoutPanel from './components/LayoutPanel';
 
 function App(): JSX.Element {
@@ -12,7 +13,8 @@ function App(): JSX.Element {
       <Routes>
         <Route element={<LayoutPanel />}>
           <Route path="/login" element={<Login />} />
-          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/reset" element={<ResetPassword />} />
         </Route>
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/" element={<Navigate to="/dashboard/home" />} />
