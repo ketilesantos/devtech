@@ -12,11 +12,11 @@ export const useStyles = makeStyles(() => ({
       marginTop: '9px',
     },
   },
-  forgotText: {
+  link: {
     display: 'flex',
     justifyContent: 'center',
     lineHeight: '27px',
-    marginTop: '9px',
+    marginTop: '10px',
     fontSize: '1.2rem',
     color: '#5B5B5B',
   },

@@ -5,8 +5,8 @@ import { FieldProps } from 'formik';
 
 const useStyles = makeStyles((theme: Theme) => ({
   input: {
-    borderRadius: '4px',
-    marginBottom: theme.spacing(1),
+    borderRadius: 'px',
+    marginBottom: theme.spacing(2),
   },
 }));
 

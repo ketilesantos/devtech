@@ -6,11 +6,15 @@ import * as yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 
 import { TextFieldWrapper } from '../TextFieldWrapper';
-import { useStyles } from './useStyles';
+import { useStyles } from '../Login/useStyles';
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
-  password: yup.string().min(8, 'Senha inválida').required('Campo obrigatório'),
+  code: yup.string().required('Campo obrigatório'),
+  newPassword: yup.string().min(8, 'Campo senha deve conter no minimo 8 caracteres').required('Campo obrigatório'),
+  confPassword: yup
+    .string()
+    .oneOf([yup.ref('newPassword'), null], 'A senha deve ser correspondente à nova senha.')
+    .required('Campo obrigatório'),
 });
 
 const INITIAL_VALUES = {

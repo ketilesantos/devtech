@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import Forgot from './pages/Forgot';
+import LayoutPanel from './components/LayoutPanel';
 
 function App(): JSX.Element {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route element={<LayoutPanel />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot" element={<Forgot />} />
+        </Route>
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/" element={<Navigate to="/dashboard/home" />} />
       </Routes>
