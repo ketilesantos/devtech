@@ -99,7 +99,7 @@ export const ResetForm = (): JSX.Element => {
               disableElevation
               sx={{ mt: 1 }}
             >
-              Entrar
+              Salvar
             </Button>
           </Form>
         )}

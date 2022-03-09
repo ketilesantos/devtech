@@ -56,7 +56,7 @@ export const ForgotForm = (): JSX.Element => {
               disableElevation
               sx={{ mt: 1 }}
             >
-              Entrar
+              Enviar
             </Button>
           </Form>
         )}

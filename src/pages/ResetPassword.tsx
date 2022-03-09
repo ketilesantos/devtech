@@ -4,7 +4,7 @@ import { ResetForm } from '../components/RecoveryPassword/ResetForm';
 
 const ResetPassword = (): JSX.Element => {
   return (
-    <Grid container alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+    <Grid container alignItems="center" justifyContent="center" sx={{ height: '100vh' }}>
       <ResetForm />
     </Grid>
   );

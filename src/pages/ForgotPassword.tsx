@@ -4,7 +4,7 @@ import { ForgotForm } from '../components/RecoveryPassword/ForgotForm';
 
 const ForgotPassword = (): JSX.Element => {
   return (
-    <Grid container alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+    <Grid container alignItems="center" justifyContent="center" sx={{ height: '100vh' }}>
       <ForgotForm />
     </Grid>
   );
