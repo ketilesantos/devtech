@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IconButton, Button, InputAdornment, Box, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import * as yup from 'yup';
@@ -20,6 +20,7 @@ const INITIAL_VALUES = {
 
 export const LoginForm = (): JSX.Element => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [showPassword, setPassword] = useState(false);
 
   return (
@@ -37,7 +38,7 @@ export const LoginForm = (): JSX.Element => {
       <Formik
         enableReinitialize
         initialValues={INITIAL_VALUES}
-        onSubmit={() => console.log('oi')}
+        onSubmit={() => navigate('/dashboard/home')}
         validationSchema={validationSchema}
       >
         {({ isValid }) => (

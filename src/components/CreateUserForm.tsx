@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
-import { IconButton, Button, InputAdornment, Box, Typography } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { Button, Box, Typography, InputAdornment, IconButton } from '@mui/material';
 import * as yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 
-import { TextFieldWrapper } from '../TextFieldWrapper';
-import { useStyles } from '../Login/useStyles';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { TextFieldWrapper } from './TextFieldWrapper';
+import { useStyles } from './Login/useStyles';
 
 const validationSchema = yup.object().shape({
-  code: yup.string().required('Campo obrigatório'),
-  newPassword: yup.string().min(8, 'Campo senha deve conter no minimo 8 caracteres').required('Campo obrigatório'),
+  name: yup.string().required('Campo obrigatório'),
+  email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
+  password: yup.string().min(8, 'Campo senha deve conter no minimo 8 caracteres').required('Campo obrigatório'),
   confPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), null], 'O campo confirmação de senha deve ser correspondente ao campo nova senha.')
+    .oneOf([yup.ref('password'), null], 'O campo confirmação de senha deve ser correspondente ao campo senha.')
     .required('Campo obrigatório'),
 });
 
 const INITIAL_VALUES = {
-  code: '',
-  newPassword: '',
+  name: '',
+  email: '',
+  password: '',
   confPassword: '',
 };
 
-export const ResetForm = (): JSX.Element => {
+export const CreateUserForm = (): JSX.Element => {
   const classes = useStyles();
-  const navigate = useNavigate();
   const [showPassword, setPassword] = useState(false);
   const [showConfPassword, setConfPassword] = useState(false);
 
@@ -33,28 +33,43 @@ export const ResetForm = (): JSX.Element => {
     <Box sx={{ width: { lg: '439px' } }}>
       <Box sx={{ mb: '13px' }}>
         <Typography className={classes.titleLabel} id="welcome-label" variant="body1">
-          Redefinir Senha
+          Cadastre-se
         </Typography>
 
         <Typography className={classes.subtitleLabel} id="fill-the-data-label" variant="subtitle2">
-          Preencha os campos abaixo para redefinir sua senha
+          Preencha os campos abaixo para criar seu usuário
         </Typography>
       </Box>
 
       <Formik
         enableReinitialize
         initialValues={INITIAL_VALUES}
-        onSubmit={() => navigate('/login')}
+        onSubmit={() => console.log('oi')}
         validationSchema={validationSchema}
       >
         {({ isValid }) => (
           <Form className={classes.form}>
-            <Field id="code" name="code" type="text" label="Código" placeholder="154DF6" component={TextFieldWrapper} />
             <Field
-              name="newPassword"
+              id="name"
+              name="name"
+              type="text"
+              label="Nome Completo"
+              placeholder="Juliana Silva Poulsh"
+              component={TextFieldWrapper}
+            />
+            <Field
+              id="email"
+              name="email"
+              type="email"
+              label="E-mail"
+              placeholder="juliana@gmail.com"
+              component={TextFieldWrapper}
+            />
+            <Field
+              name="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Digite sua senha"
-              label="Nova senha"
+              label="Senha"
               component={TextFieldWrapper}
               InputProps={{
                 endAdornment: (
@@ -101,7 +116,7 @@ export const ResetForm = (): JSX.Element => {
               disableElevation
               sx={{ mt: 1 }}
             >
-              Salvar
+              Cadastrar
             </Button>
           </Form>
         )}

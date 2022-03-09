@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import ForgotPassword from './pages/ForgotPassword';
+import CreateUser from './pages/CreateUser';
 import LayoutPanel from './components/LayoutPanel';
 
 function App(): JSX.Element {
@@ -15,6 +16,7 @@ function App(): JSX.Element {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route path="/reset" element={<ResetPassword />} />
+          <Route path="/signup" element={<CreateUser />} />
         </Route>
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/" element={<Navigate to="/dashboard/home" />} />
