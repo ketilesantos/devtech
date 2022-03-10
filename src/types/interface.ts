@@ -1,5 +1,5 @@
-export interface Header {
-  icon: JSX.Element | string;
-  text: string;
-  path: string;
+export interface ITasks {
+  newTask: string;
+  id: number;
+  status: 'ACTIVE' | 'FINISHED';
 }
