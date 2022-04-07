@@ -13,8 +13,14 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-export const NewTask = (): JSX.Element => {
-  const [tasks, setTasks] = useState<ITasks[]>([]);
+interface NewTaskProps {
+  onDelete: (task: ITasks) => void;
+  setTasks: (tasks: ITasks[]) => void;
+  tasks: ITasks[];
+  onFinished: (task: ITasks) => void;
+}
+
+export const NewTask = ({ onDelete, setTasks, tasks, onFinished }: NewTaskProps): JSX.Element => {
   const [value, setValue] = useState('');
 
   const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,20 +51,23 @@ export const NewTask = (): JSX.Element => {
         </StyledButton>
       </FormGroup>
       <Grid container direction="column">
-        {tasks.map((task) => (
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="space-between"
-            key={task.newTask}
-            sx={{ background: '#F7F7F7', borderRadius: '4px', mt: '1rem', p: '1rem' }}
-          >
-            <Typography variant="h6" sx={{ fontSize: '1.1rem', color: '#5B5B5B' }}>
-              {task.newTask}
-            </Typography>
-            <NewTasksMenu onModalDelete={() => console.log('oi')} onModalEdit={() => console.log('oi')} />
-          </Grid>
-        ))}
+        {tasks.map(
+          (task) =>
+            task.status !== 'FINISHED' && (
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="space-between"
+                key={task.newTask}
+                sx={{ background: '#F7F7F7', borderRadius: '4px', mt: '1rem', p: '1rem' }}
+              >
+                <Typography variant="h6" sx={{ fontSize: '1.1rem', color: '#5B5B5B' }}>
+                  {task.newTask}
+                </Typography>
+                <NewTasksMenu onModalDelete={() => onDelete(task)} onModalEdit={() => onFinished(task)} />
+              </Grid>
+            )
+        )}
       </Grid>
     </form>
   );
