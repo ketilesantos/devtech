@@ -4,10 +4,14 @@ import { DeleteTask } from '../components/NewTasks/DeleteTask';
 import { FinishedTask } from '../components/NewTasks/FinishedTask';
 import { ITasks } from '../types/interface';
 
-export const NewTasks = (): JSX.Element => {
+interface NewTaskProps {
+  tasks: ITasks[];
+  setTasks: (task: ITasks[]) => void;
+}
+
+export const NewTasks = ({ tasks, setTasks }: NewTaskProps): JSX.Element => {
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenFinished, setIsOpenFinished] = useState(false);
-  const [tasks, setTasks] = useState<ITasks[]>([]);
   const [task, setTask] = useState<ITasks>();
 
   const handleDelete = (seletedTask: ITasks) => {
@@ -19,8 +23,6 @@ export const NewTasks = (): JSX.Element => {
     setTask(seletedTask);
     setIsOpenFinished(true);
   };
-
-  console.log(tasks);
 
   return (
     <>

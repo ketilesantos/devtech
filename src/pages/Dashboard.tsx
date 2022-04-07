@@ -7,6 +7,8 @@ import { SideMenu } from '../components/SideMenu';
 import { Header } from '../components/Header';
 import { Home } from './Home';
 import { NewTasks } from './NewTasks';
+import { FinishedTasks } from './FinishedTasks';
+import { ITasks } from '../types/interface';
 
 const useStyles = makeStyles(({ breakpoints }: Theme) => ({
   main: {
@@ -22,6 +24,8 @@ const Dashboard = (): JSX.Element => {
   const classes = useStyles();
   const xsDown = useMediaQuery(breakpoints.down('sm'));
   const [open, setOpen] = useState(true);
+  const [tasks, setTasks] = useState<ITasks[]>([]);
+
   return (
     <>
       <SideMenu variant={xsDown ? 'temporary' : 'permanent'} open={open} onClose={() => setOpen(false)} />
@@ -30,8 +34,8 @@ const Dashboard = (): JSX.Element => {
         <section style={{ padding: '2rem' }}>
           <Routes>
             <Route path="home" element={<Home />} />
-            <Route path="new-tasks" element={<NewTasks />} />
-            <Route path="finished-tasks" element="Hellow 3" />
+            <Route path="new-tasks" element={<NewTasks tasks={tasks} setTasks={setTasks} />} />
+            <Route path="finished-tasks" element={<FinishedTasks tasks={tasks} />} />
           </Routes>
         </section>
       </main>
